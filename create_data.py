@@ -10,6 +10,7 @@ from marshmallow import Schema, fields
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JSON_AS_ASCII'] = False
 db = SQLAlchemy(app)
 
 
@@ -267,9 +268,9 @@ for director in data["directors"]:
         db.session.add(d)
 
 for genre in data["genres"]:
-    d = Genre(
+    g = Genre(
         id=genre["pk"],
         name=genre["name"],
     )
     with db.session.begin():
-        db.session.add(d)
+        db.session.add(g)
